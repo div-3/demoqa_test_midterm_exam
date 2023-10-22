@@ -1,10 +1,8 @@
 package page;
 
 import block.BookRow;
-import block.Header;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -25,6 +23,7 @@ public class BooksPage extends Page {
         super(driver, Pages.BOOKS);
         PageFactory.initElements(driver, this);
     }
+
     public ArrayList<BookRow> getBooks() {
         System.out.println("Количество строк в таблице: " + tableRows.size());
         for (int i = 0; i < tableRows.size(); i++) {

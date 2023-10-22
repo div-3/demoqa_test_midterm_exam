@@ -19,7 +19,7 @@ public class BookRow {
 //        System.out.println(bookTitleLink.getText() + " / " + bookAuthor.getText() + " / " + bookPublisher.getText());
     }
 
-    public void openBook(){
+    public void openBook() {
         bookTitleLink.click();
     }
 }

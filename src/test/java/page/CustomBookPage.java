@@ -1,9 +1,7 @@
 package page;
 
-import block.Header;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -42,6 +40,4 @@ public class CustomBookPage extends Page {
         backToStoreButton.click();
         return new BooksPage(driver);
     }
-
-
 }

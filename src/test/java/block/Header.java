@@ -23,10 +23,10 @@ public class Header {
         PageFactory.initElements(driver, this);
     }
 
-    public Header awaitUserName(String name){
+    public Header awaitUserName(String name) {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .withMessage("Не дождались авторизации!")
-        .until(ExpectedConditions.textToBePresentInElement (userName, name));
+                .until(ExpectedConditions.textToBePresentInElement(userName, name));
         return this;
     }
 }

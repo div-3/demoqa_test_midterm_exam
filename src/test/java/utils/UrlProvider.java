@@ -14,11 +14,11 @@ public class UrlProvider {
     private final static String BOOKS_PROP_NAME = "url.books";
     private final static String BASE = "url.";
 
-    public static String getUrlByPagesEnum(Pages page){
+    public static String getUrlByPagesEnum(Pages page) {
         return getUrlFromFile(BASE + page.toString());
     }
 
-    private static String getUrlFromFile(String page){
+    private static String getUrlFromFile(String page) {
         File propFile = new File(URL_DATA_PATH);
         Properties properties = new Properties();
         try {
