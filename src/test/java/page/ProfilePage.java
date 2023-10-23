@@ -47,12 +47,11 @@ public class ProfilePage extends Page {
         return bookRows;
     }
 
-//    @Step("Изменить количество отображаемых в таблице книг на '{count.getCode}'")
-    @Step("Изменить количество отображаемых в таблице книг на ")
+    @Step("Изменить количество отображаемых в таблице книг на '{count.title}'")
     public void setBookRowPerPage(RowCount count) {
         scrollDownPage(0, 500);
         Select select = new Select(selectRowPerPage);
-        select.selectByValue(count.getCode());
+        select.selectByValue(count.getTitle());
     }
 
     @Step("Проверка, что в PROFILE отсутствуют книги")

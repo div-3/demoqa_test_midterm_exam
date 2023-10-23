@@ -17,14 +17,12 @@ public class Page {
         header = new Header(driver);
     }
 
-//    @Step("Загрузить страницу '{currentPage}'")
-    @Step("Загрузить страницу ")
+    @Step("Загрузить страницу '{this.currentPage}'")
     public void loadPage() {
         driver.get(UrlProvider.getUrlByPagesEnum(currentPage));
     }
 
-//    @Step("Прокрутка страницы на '{pixelX}' по горизонтали и '{pixelY}' по вертикали")
-    @Step("Прокрутка страницы на по вертикали")
+    @Step("Прокрутка страницы на '{pixelX}' по горизонтали и '{pixelY}' по вертикали")
     protected void scrollDownPage(int pixelX, int pixelY) {
         Actions actions = new Actions(driver);
         actions.scrollByAmount(pixelX, pixelY).perform();

@@ -33,8 +33,7 @@ public class BooksPage extends Page {
         return bookRows;
     }
 
-//    @Step("Открыть книгу из строки '{row}'")
-    @Step("Открыть книгу из строки")
+    @Step("Открыть книгу из строки '{row}'")
     public CustomBookPage openBookAtRow(int row) {
         scrollDownPage(0, 500);
         if (bookRows.isEmpty()) getBooks();

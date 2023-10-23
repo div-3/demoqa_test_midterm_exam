@@ -8,13 +8,13 @@ public enum RowCount {
     ROWS_50("50"),
     ROWS_100("100");
 
-    private String code;
+    private String title;
 
-    RowCount(String code) {
-        this.code = code;
+    RowCount(String title) {
+        this.title = title;
     }
 
-    public String getCode() {
-        return code;
+    public String getTitle() {
+        return title;
     }
 }
