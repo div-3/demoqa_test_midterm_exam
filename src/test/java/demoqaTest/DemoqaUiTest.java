@@ -56,7 +56,6 @@ public class DemoqaUiTest{
 
         step("4. Проверить, что таблица пустая", () -> {
             assertTrue(profilePage.isNoRowNotificationDisplayed());
-            assertFalse(profilePage.isNoRowNotificationDisplayed());
         });
     }
 
