@@ -2,39 +2,44 @@ package demoqaTest;
 
 import block.RowCount;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import io.github.bonigarcia.seljup.SeleniumJupiter;
 import io.qameta.allure.*;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import page.BooksPage;
 import page.CustomBookPage;
 import page.LoginPage;
 import page.ProfilePage;
 import utils.APIService;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Selenide.open;
-//import static com.codeborne.selenide.WebDriverRunner.browser;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Epic("Профиль")
-@ExtendWith({SeleniumJupiter.class})
-@DisplayName("UI-тесты demoqa.com:")
-public class DemoqaUiTest{
+@ExtendWith(ScreenShooterExtension.class)
 
+@DisplayName("UI-тесты demoqa.com:")
+public class DemoqaUiTest {
+
+    @Step("Настройка браузера")
     @BeforeAll
-    public static void setUp(){
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
-                .screenshots(true)
-                .savePageSource(false)
-        );
+    public static void setUp() {
+        SelenideLogger.addListener("AllureSelenide",
+                new AllureSelenide().screenshots(true).savePageSource(false));
+
         Configuration.browser = "firefox";
         Configuration.browserSize = "1920x1080";
+    }
+
+    @Step("Очистка Cookies и LocalStorage")
+    @AfterEach
+    public void clearBrowser() {
+        Selenide.clearBrowserCookies();
+        Selenide.clearBrowserLocalStorage();
     }
 
     //Очистка данных через API
@@ -53,14 +58,10 @@ public class DemoqaUiTest{
     @Severity(SeverityLevel.BLOCKER)    //Важность теста для Allure
     @Owner("Dudorov")
     @Tag("Positive")
-//    public void demoqaUiTest(FirefoxDriver browser) {
     public void demoqaUiTest() {
-        open();
-//        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
         LoginPage loginPage = new LoginPage();
-        ;
         step("1. Открыть страницу https://demoqa.com/login", () -> {
+            open();
             loginPage.loadPage();
         });
 
@@ -73,7 +74,7 @@ public class DemoqaUiTest{
 
         step("4. Проверить, что таблица пустая", () -> {
             assertTrue(profilePage.isNoRowNotificationDisplayed());
-            assertFalse(profilePage.isNoRowNotificationDisplayed());
+//            assertFalse(profilePage.isNoRowNotificationDisplayed());
         });
     }
 
@@ -82,16 +83,14 @@ public class DemoqaUiTest{
     @Description("Тест добавления 6 книг в профиль.")
     @Story("Как пользователь, я могу авторизоваться и добавлять книги в профиль")
     @Feature("Добавление книг в профиль")
-    @Tags({@Tag("Authorization"), @Tag("Profile"), @Tag("BookStore")})  //Теги для JUnit и Allure
+    @Tags({@Tag("Profile"), @Tag("BookStore")})  //Теги для JUnit и Allure
     @Severity(SeverityLevel.BLOCKER)    //Важность теста для Allure
     @Owner("Dudorov")
     @Tag("Positive")
-//    public void demoqaUiTest2(FirefoxDriver browser) {
     public void demoqaUiTest2() {
-//        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        open();
         LoginPage loginPage = new LoginPage();
         step("1. Открыть страницу https://demoqa.com/login", () -> {
+            open();
             loginPage.loadPage();
         });
 
@@ -110,7 +109,6 @@ public class DemoqaUiTest{
             booksPage = book.backToStore();
         }
 
-
         ProfilePage profilePage = new ProfilePage();
         step("5. Перейти в раздел https://demoqa.com/profile", () -> {
             profilePage.loadPage();
@@ -127,17 +125,14 @@ public class DemoqaUiTest{
     @Description("Тест добавления книг в профиль и удаления всех книг из профиля.")
     @Story("Как пользователь, я могу авторизоваться, добавлять и удалять книги в профиль")
     @Feature("Удаление книг из профиля")
-    @Tags({@Tag("Authorization"), @Tag("Profile"), @Tag("BookStore")})  //Теги для JUnit и Allure
+    @Tags({@Tag("Profile"), @Tag("BookStore"), @Tag("Delete")})  //Теги для JUnit и Allure
     @Severity(SeverityLevel.BLOCKER)    //Важность теста для Allure
     @Owner("Dudorov")
     @Tag("Positive")
-//    public void demoqaUiTest3(FirefoxDriver browser) throws InterruptedException {
-    public void demoqaUiTest3() throws InterruptedException {
-//        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        open();
+    public void demoqaUiTest3() {
         LoginPage loginPage = new LoginPage();
-        ;
         step("1. Открыть страницу https://demoqa.com/login", () -> {
+            open();
             loginPage.loadPage();
         });
 
@@ -171,6 +166,7 @@ public class DemoqaUiTest{
 
         step("8. Проверить, что таблица пустая", () -> {
             assertTrue(profilePage.isNoRowNotificationDisplayed());
+//            assertEquals(false, profilePage.isNoRowNotificationDisplayed());
         });
     }
 }

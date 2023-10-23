@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 
 public class APIService {
 
-    private final static String PROPERTIES_FILE_PATH = "src/main/resources/api_service.properties";
+    private final String PROPERTIES_FILE_PATH = "src/main/resources/api_service.properties";
 
     public Map<String, String> login() {
         String userName = AuthDataProvider.getUserName();
