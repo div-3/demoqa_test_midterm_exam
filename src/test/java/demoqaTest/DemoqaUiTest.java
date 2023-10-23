@@ -1,8 +1,11 @@
 package demoqaTest;
 
 import block.RowCount;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import io.github.bonigarcia.seljup.SeleniumJupiter;
 import io.qameta.allure.*;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -14,6 +17,8 @@ import utils.APIService;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Selenide.open;
+//import static com.codeborne.selenide.WebDriverRunner.browser;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +26,16 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith({SeleniumJupiter.class})
 @DisplayName("UI-тесты demoqa.com:")
 public class DemoqaUiTest{
+
+    @BeforeAll
+    public static void setUp(){
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false)
+        );
+        Configuration.browser = "firefox";
+        Configuration.browserSize = "1920x1080";
+    }
 
     //Очистка данных через API
     @AfterEach
@@ -38,10 +53,12 @@ public class DemoqaUiTest{
     @Severity(SeverityLevel.BLOCKER)    //Важность теста для Allure
     @Owner("Dudorov")
     @Tag("Positive")
-    public void demoqaUiTest(FirefoxDriver browser) {
-        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//    public void demoqaUiTest(FirefoxDriver browser) {
+    public void demoqaUiTest() {
+        open();
+//        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-        LoginPage loginPage = new LoginPage(browser);
+        LoginPage loginPage = new LoginPage();
         ;
         step("1. Открыть страницу https://demoqa.com/login", () -> {
             loginPage.loadPage();
@@ -52,7 +69,7 @@ public class DemoqaUiTest{
         });
 
         step("3. Перейти в раздел https://demoqa.com/profile");
-        ProfilePage profilePage = new ProfilePage(browser);
+        ProfilePage profilePage = new ProfilePage();
 
         step("4. Проверить, что таблица пустая", () -> {
             assertTrue(profilePage.isNoRowNotificationDisplayed());
@@ -69,10 +86,11 @@ public class DemoqaUiTest{
     @Severity(SeverityLevel.BLOCKER)    //Важность теста для Allure
     @Owner("Dudorov")
     @Tag("Positive")
-    public void demoqaUiTest2(FirefoxDriver browser) {
-        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
-        LoginPage loginPage = new LoginPage(browser);
+//    public void demoqaUiTest2(FirefoxDriver browser) {
+    public void demoqaUiTest2() {
+//        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        open();
+        LoginPage loginPage = new LoginPage();
         step("1. Открыть страницу https://demoqa.com/login", () -> {
             loginPage.loadPage();
         });
@@ -82,7 +100,7 @@ public class DemoqaUiTest{
         });
 
         step("3. Перейти в раздел https://demoqa.com/books");
-        BooksPage booksPage = new BooksPage(browser);
+        BooksPage booksPage = new BooksPage();
         booksPage.loadPage();
 
         step("4. Добавить в коллекцию 6 книг");
@@ -93,7 +111,7 @@ public class DemoqaUiTest{
         }
 
 
-        ProfilePage profilePage = new ProfilePage(browser);
+        ProfilePage profilePage = new ProfilePage();
         step("5. Перейти в раздел https://demoqa.com/profile", () -> {
             profilePage.loadPage();
             profilePage.setBookRowPerPage(RowCount.ROWS_20);
@@ -113,10 +131,11 @@ public class DemoqaUiTest{
     @Severity(SeverityLevel.BLOCKER)    //Важность теста для Allure
     @Owner("Dudorov")
     @Tag("Positive")
-    public void demoqaUiTest3(FirefoxDriver browser) throws InterruptedException {
-        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
-        LoginPage loginPage = new LoginPage(browser);
+//    public void demoqaUiTest3(FirefoxDriver browser) throws InterruptedException {
+    public void demoqaUiTest3() throws InterruptedException {
+//        browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        open();
+        LoginPage loginPage = new LoginPage();
         ;
         step("1. Открыть страницу https://demoqa.com/login", () -> {
             loginPage.loadPage();
@@ -127,7 +146,7 @@ public class DemoqaUiTest{
         });
 
         step("3. Перейти в раздел https://demoqa.com/books");
-        BooksPage booksPage = new BooksPage(browser);
+        BooksPage booksPage = new BooksPage();
         booksPage.loadPage();
 
         step("4. Добавить в коллекцию 2 книги");
@@ -137,7 +156,7 @@ public class DemoqaUiTest{
             booksPage = book.backToStore();
         }
 
-        ProfilePage profilePage = new ProfilePage(browser);
+        ProfilePage profilePage = new ProfilePage();
         step("5. Перейти в раздел https://demoqa.com/profile", () -> {
             profilePage.loadPage();
         });
