@@ -1,6 +1,7 @@
 package page;
 
 import block.BookRow;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,20 +25,20 @@ public class BooksPage extends Page {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Получить все книги на странице BOOKS")
     public ArrayList<BookRow> getBooks() {
-        System.out.println("Количество строк в таблице: " + tableRows.size());
         for (int i = 0; i < tableRows.size(); i++) {
             bookRows.add(new BookRow(tableRows.get(i)));
         }
         return bookRows;
     }
 
+//    @Step("Открыть книгу из строки '{row}'")
+    @Step("Открыть книгу из строки")
     public CustomBookPage openBookAtRow(int row) {
         scrollDownPage(0, 500);
         if (bookRows.isEmpty()) getBooks();
         bookRows.get(row).openBook();
         return new CustomBookPage(driver);
     }
-
-
 }

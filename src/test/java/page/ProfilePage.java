@@ -2,6 +2,7 @@ package page;
 
 import block.BookRow;
 import block.RowCount;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,24 +39,28 @@ public class ProfilePage extends Page {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Получить список книг на странице PROFILE")
     public ArrayList<BookRow> getBooks() {
-        System.out.println("Количество строк в таблице: " + tableRows.size());
         for (int i = 0; i < tableRows.size(); i++) {
             bookRows.add(new BookRow(tableRows.get(i)));
         }
         return bookRows;
     }
 
+//    @Step("Изменить количество отображаемых в таблице книг на '{count.getCode}'")
+    @Step("Изменить количество отображаемых в таблице книг на ")
     public void setBookRowPerPage(RowCount count) {
         scrollDownPage(0, 500);
         Select select = new Select(selectRowPerPage);
         select.selectByValue(count.getCode());
     }
 
+    @Step("Проверка, что в PROFILE отсутствуют книги")
     public boolean isNoRowNotificationDisplayed() {
         return noRowsNotification.isDisplayed();
     }
 
+    @Step("Удалить все книги из PROFILE")
     public void deleteAllBooks() {
         scrollDownPage(0, 500);
 

@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class CustomBookPage extends Page {
-
     @FindBy(xpath = "//*[text()='Back To Book Store']")
     private WebElement backToStoreButton;
     @FindBy(xpath = "//*[text()='Add To Your Collection']")
@@ -22,6 +22,7 @@ public class CustomBookPage extends Page {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Добавить книгу в коллекцию")
     public void addToCollection() {
         scrollDownPage(0, 500);
         addToCollectionButton.click();
@@ -35,6 +36,7 @@ public class CustomBookPage extends Page {
         driver.switchTo().alert().accept();
     }
 
+    @Step("Возврат на страницу BOOK STORE")
     public BooksPage backToStore() {
         scrollDownPage(0, 500);
         backToStoreButton.click();
