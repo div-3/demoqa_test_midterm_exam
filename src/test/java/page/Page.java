@@ -17,6 +17,7 @@ public class Page {
 
     @Step("Загрузить страницу '{this.currentPage}'")
     public void loadPage() {
-        open(UrlProvider.getUrlByPagesEnum(currentPage));
+        UrlProvider urlProvider = UrlProvider.getInstance();
+        open(urlProvider.getUrlByPagesEnum(currentPage));
     }
 }

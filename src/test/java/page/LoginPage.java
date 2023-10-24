@@ -19,9 +19,10 @@ public class LoginPage extends Page {
 
     @Step("Авторизация")
     public void auth() {
-        String name = AuthDataProvider.getUserName();
+        AuthDataProvider authDataProvider = AuthDataProvider.getInstance();
+        String name = authDataProvider.getUserName();
         userNameInput.sendKeys(name);
-        passwordInput.sendKeys(AuthDataProvider.getPassword());
+        passwordInput.sendKeys(authDataProvider.getPassword());
         loginButton.click();
         header.awaitUserName(name);
     }

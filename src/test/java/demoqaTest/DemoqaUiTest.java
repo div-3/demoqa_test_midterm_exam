@@ -45,7 +45,7 @@ public class DemoqaUiTest {
     //Очистка данных через API
     @AfterEach
     public void clearDataAPI() {
-        APIService apiService = new APIService();
+        APIService apiService = APIService.getInstance();
         apiService.deleteAllBooks();
     }
 

@@ -15,9 +15,22 @@ public class APIService {
 
     private final String PROPERTIES_FILE_PATH = "src/main/resources/api_service.properties";
 
+    //Реализация Singleton по https://habr.com/ru/articles/27108/
+    private APIService() {
+    }
+
+    public static APIService getInstance() {
+        return SingletonHolder.instance;
+    }
+
+    private static class SingletonHolder {
+        private final static APIService instance = new APIService();
+    }
+
     public Map<String, String> login() {
-        String userName = AuthDataProvider.getUserName();
-        String password = AuthDataProvider.getPassword();
+        AuthDataProvider authDataProvider = AuthDataProvider.getInstance();
+        String userName = authDataProvider.getUserName();
+        String password = authDataProvider.getPassword();
         if (userName == null || password == null) return null;
 
         return getToken(userName, password);
@@ -67,4 +80,6 @@ public class APIService {
         }
         return properties;
     }
+
+
 }
